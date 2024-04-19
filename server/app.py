@@ -49,8 +49,13 @@ class Plants(Resource):
 
 api.add_resource(Plants, '/plants')
 
+
 class PlantByID(Resource):
-    pass
+    def get(self, id):
+        response_dict = Plant.query.filter_by(id=id).first().to_dict()
+        return make_response(response_dict, 200)
+
+api.add_resource(PlantByID, '/plants/<int:id>')
         
 
 if __name__ == '__main__':
